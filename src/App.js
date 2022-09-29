@@ -1,7 +1,5 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/swiper.min.css';
-// import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -18,19 +16,6 @@ import {
   Paper
 } from '@mui/material';
 
-// import { makeStyles } from ' @mui/styles';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(1)
-//   },
-//   title: {
-//     flexGrow: 1
-//   }
-// }))
 
 import SwiperCore, {
   Navigation
@@ -38,13 +23,31 @@ import SwiperCore, {
 
 SwiperCore.use([Navigation]);
 
+const gallery = [
+  {
+    text: 'slide 1',
+    image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+  },
+  {
+    text: 'slide 2',
+    image: 'https://images.unsplash.com/photo-1594908900066-3f47337549d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+  },
+  {
+    text: 'slide 3',
+    image: 'https://images.unsplash.com/photo-1536854150886-354a3b64b7d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=875&q=80'
+  },
+]
+
 
 
 function App() {
 
   return (
   <>
-    <AppBar position="fixed" color="primary">
+    <AppBar 
+      position="fixed" 
+      color="primary"
+    >
       <Container fixed >
         <Toolbar>
           <Typography marginRight={100}>UserName</Typography>
@@ -58,25 +61,26 @@ function App() {
     </AppBar>
     
     <main>
-      <Paper elevation={3}>
-      <Box marginTop={10} paddingTop={5} paddingBottom={5}>
+      <Paper>
+      <Box marginTop={8} marginRight={-2} marginLeft={-2}>
         <Swiper  navigation={true} className="mySwiper">
-          {['Slide 1', 'Slide 2', 'Slide 3'].map((item, i) => (
+          {gallery.map((item, i) => (
             <SwiperSlide key={i}>
               <Typography
+                paddingTop={8} 
+                paddingBottom={8}
+                style={{ backgroundImage: `url(${item.image})`, backgroundPosition: 'center',
+                color: 'white'}}
                 variant={'h6'}
                 align={'center'}
               >
-                {item}
+                {item.text}
               </Typography>
             </SwiperSlide>
           ))}
         </Swiper>
       </Box>
       </Paper>
-
-
-
 
     </main>
   </>
