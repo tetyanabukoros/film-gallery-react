@@ -5,9 +5,11 @@ import 'swiper/css/navigation';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+// import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+// import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+
 import StarIcon from '@mui/icons-material/Star';
-
-
+import films from './api/movies.json'
 
 import Grid from '@mui/material/Grid';
 import { 
@@ -42,18 +44,51 @@ SwiperCore.use([Navigation]);
 // });
 
 const cards = [
+//   {"Title":"Love Actually",
+//   "Year":"2003",
+//   "Runtime":"135 min",
+//   "Genre":"Comedy, Drama, Romance",
+//   "Director":"Richard Curtis",
+//   "Writer":"Richard Curtis",
+//   "Actors":"Hugh Grant, Martine McCutcheon, Liam Neeson",
+//   "Plot":"Follows the lives of eight very different couples in dealing with their love lives in various loosely interrelated tales all set during a frantic month before Christmas in London, England.",
+//   "Language":"English, Portuguese, French",
+//   "Country":"United Kingdom, France, United States"
+//   ,"Awards":"Won 1 BAFTA Award10 wins & 29 nominations total"
+//   ,"Poster":"https://m.media-amazon.com/images/M/MV5BMTY4NjQ5NDc0Nl5BMl5BanBnXkFtZTYwNjk5NDM3._V1_SX300.jpg",
+//   "imdbRating":"7.6",
+//   "imdbVotes":"478,522",
+//   "imdbID":"tt0314331",
+// },
+  {"title":"Love Actually",
+  "year":"2003",
+  "Runtime":"135 min",
+  "genre":"Comedy, Drama, Romance",
+  "director":"Richard Curtis",
+  "writer":"Richard Curtis",
+  "actors":"Hugh Grant, Martine McCutcheon, Liam Neeson",
+  "description":"Follows the lives of eight very different couples in dealing with their love lives in various loosely interrelated tales all set during a frantic month before Christmas in London, England.",
+  "Language":"English, Portuguese, French",
+  "Country":"United Kingdom, France, United States"
+  ,"Awards":"Won 1 BAFTA Award10 wins & 29 nominations total"
+  ,"imgUrl":"https://m.media-amazon.com/images/M/MV5BMTY4NjQ5NDc0Nl5BMl5BanBnXkFtZTYwNjk5NDM3._V1_SX300.jpg",
+  "imdbRating":"7.6",
+  "imdbVotes":"478,522",
+  "imdbID":"tt0314331",
+},
+
   {
     "title": "Inception",
-    "description": "Follows the lives of eight very different couples in dealing with their love lives in various loosely interrelated tales all set during a frantic month before Christmas in London, England.",
+    "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
     "imgUrl": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
     "imdbUrl": "https://www.imdb.com/title/tt1375666",
     "imdbId": "tt1375666",
     "director": "Christopher Nolan",
     "year": "2010",
     "genre": "Action, Adventure, Sci-Fi",
-    "writer":" Richard Curtis",
-    "imdbRating": "7.6",
-    "actors": "Hugh Grant, Martine McCutcheon, Keira Knightley, Martine McCutcheon, Laura Linney"
+    "writer":"Christopher Nolan",
+    "imdbRating": "8.8",
+    "actors": "Leonardo DiCaprio, Tom Berenger, Michael Caine, Lukas Haas, Marion Cotillard, Joseph Gordon-Levitt, Tom Hardy, Elliot Page, Ken Watanabe, Dileep Rao"
   },
   {
     "title": "Love Actually",
@@ -413,33 +448,33 @@ function App() {
             spacing={{ xs: 2, md: 3 }} 
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
-            {cards.map((card) => (
+            {films.map((card) => (
               <Grid  key={card.imdbId} item xs={6} >
                 <Card >
                       <CardMedia
                        style={{ backgroundColor: " rgba(0,0,0,.3)"}}
                         component="img"
                         height="550"
-                        image={card.imgUrl}
-                        alt={card.title}
+                        image={card.Poster}
+                        alt={card.Title}
                       />
                   <CardContent>
                     <Typography variant="h3" gutterButton style={{position: "absolute", transform: "translateY(-150px)", 
                     color: "white",  maxWidth: "300px", background: "rgba(0,0,0,.5)"}}>
-                      {card.title}
+                      {card.Title}
                     </Typography>
                     <Typography variant="h5" gutterButton>
                       {'Genre:'} 
                       {' '}
-                      {card.genre}
+                      {card.Genre}
                     </Typography>
                     <Typography>
-                      {`Director: ${card.director}`}
+                      {`Director: ${card.Director}`}
                     </Typography>
                     <Typography>
                       {'Year:'}
                       {' '}
-                      {card.year}
+                      {card.Year}
                     </Typography>
                     <CardActions>
                       <Button 
@@ -450,7 +485,7 @@ function App() {
                           setSelectedFilm(card);
                         }
                           } 
-                        style={{backgroundColor: '#DC143C', marginRight: "40px"}} variant="contained">
+                        style={{backgroundColor: '#DC143C', marginRight: "120px"}} variant="contained">
                         See more
                         <InfoOutlinedIcon color="inherit" />
                       </Button>
@@ -462,32 +497,28 @@ function App() {
                         onClose={handleClose}
                         aria-describedby="alert-dialog-slide-description"
                       >
-                        <DialogTitle>{selectedFilm.title}</DialogTitle>
+                        <DialogTitle>{selectedFilm.Title}</DialogTitle>
                         <DialogContent style={{display: "flex"}}>
                           <div style={{maxWidth: "150px", marginRight: "15px" }}>
                             <CardMedia
                               component="img"
-                              image={selectedFilm.imgUrl}
-                              alt={selectedFilm.title}
+                              image={selectedFilm.Poster}
+                              alt={selectedFilm.Title}
                             />
                           </div>
                           <div style={{display: "flex", flexDirection: "column"}}>                       
-                            {/* <Typography gutterBottom variant="h6" component="div">
-                              {`IMDb rating: ${selectedFilm.imdbRating}`}
-                              <StarIcon fontSize="medium" style={{color: '#ffeb3b', marginBottom: "-3px"}} />
-                            </Typography> */}
                             <Typography gutterBottom variant="h6" component="div">
                               {`IMDb rating: ${selectedFilm.imdbRating}`}
                               <StarIcon fontSize="medium" style={{color: '#ffeb3b', marginBottom: "-5px"}} />
                             </Typography>
                             <DialogContentText style={{ marginBottom: "15px" }} id="alert-dialog-slide-description">
-                              {card.description}
+                              {card.Plot}
                             </DialogContentText>
                             <Typography  gutterBottom  component="div">
-                              {`Writer: ${selectedFilm.writer}`}
+                              {`Writer: ${selectedFilm.Writer}`}
                             </Typography>
                             <Typography variant="subtitle2" gutterBottom component="div">
-                              {`Actors: ${selectedFilm.actors}`}
+                              {`Actors: ${selectedFilm.Actors}`}
                             </Typography>
                           </div>
                         </DialogContent>
@@ -497,8 +528,8 @@ function App() {
                         </DialogActions>
                       </Dialog>
 
-                      <ThumbUpOutlinedIcon />
-                      <ThumbDownOutlinedIcon />
+                      {card.imdbRating > 7 ? <ThumbUpOutlinedIcon style={{color: '#2e7d32'}}/> : <ThumbDownOutlinedIcon style={{color: '#dd2c00'}}/> }
+
 
                     </CardActions>
                   </CardContent>
