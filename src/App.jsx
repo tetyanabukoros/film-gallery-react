@@ -15,11 +15,16 @@ SwiperCore.use([Navigation]);
 function App() {
 
   const [openSignIn, setOpenSignIn] = useState(false);
+  const [openSignUp, setOpenSignUp] = useState(false);
   const [openFilmInfo, setOpenFilmInfo] = useState(false);
   const [selectedFilm, setSelectedFilm] = useState({});
 
   const handleOpenSignIn = () => {
     setOpenSignIn(true);
+  }
+
+  const handleOpenSignUp = () => {
+    setOpenSignUp(true);
   }
 
   const handleClose = () => {
@@ -36,12 +41,15 @@ function App() {
     <Header 
       handleOpenSignIn={handleOpenSignIn} 
       openSignIn={openSignIn} 
-      handleClose={handleClose} 
+      handleClose={handleClose}
+      handleOpenSignUp={handleOpenSignUp} 
+      openSignUp={openSignUp} 
     />
 
   <Main 
     handleOpenFilmInfo={handleOpenFilmInfo} 
-    setSelectedFilm={setSelectedFilm} 
+    setSelectedFilm={setSelectedFilm}
+  
   />
 
   <Footer />

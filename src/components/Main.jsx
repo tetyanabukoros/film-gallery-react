@@ -99,10 +99,9 @@ export const Main = ({ handleOpenFilmInfo, setSelectedFilm }) => {
                     </Button>
                     { 
                     card.imdbRating > 7 
-                     ? <ThumbUpOutlinedIcon style={{color: '#2e7d32'}}/> 
-                     : <ThumbDownOutlinedIcon style={{color: '#dd2c00'}}/> 
+                      ? <ThumbUpOutlinedIcon style={{color: '#2e7d32'}}/> 
+                      : <ThumbDownOutlinedIcon style={{color: '#dd2c00'}}/> 
                     }
- 
                   </CardActions>
                 </CardContent>
               </Card>

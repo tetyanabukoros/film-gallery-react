@@ -39,7 +39,7 @@ export const Modal = ({selectedFilm, openFilmInfo, handleClose}) => {
             alt={selectedFilm.Title}
           />
         </div>
-        <div style={{display: "flex", flexDirection: "column"}}>                       
+        <div style={{display: "flex", flexDirection: "column"}}> 
           <Typography gutterBottom variant="h6" component="div">
             {`IMDb rating: ${selectedFilm.imdbRating}`}
             <StarIcon fontSize="medium" style={{color: '#ffeb3b', marginBottom: "-5px"}} />
