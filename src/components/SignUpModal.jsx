@@ -55,7 +55,6 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           onChange={((e) => setName(e.target.value))}
         />
         <TextField 
-          autoFocus
           value={email}
           margin="dense"
           id="email"
@@ -66,7 +65,6 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
 
         />
         <TextField 
-          autoFocus
           value={password}
           margin="dense"
           id="pass"

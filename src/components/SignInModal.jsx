@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { 
   Button,
@@ -8,33 +8,23 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
+  Alert
 } from '@mui/material';
+import { AppContext } from '../AppContext';
 
-export const getEmail = localStorage.getItem("emailData")
-export const getPassword = localStorage.getItem("passwordData")
+export const SignInModal = ({ openSignIn, handleClose }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
-export const SignInModal = ({ openSignIn, handleClose, setShowHome }) => {
-
-  const email = useRef();
-  const password = useRef();
-  const localEmail = localStorage.getItem("email");
-  const localPassword = localStorage.getItem("password");
+  const { users, setAuthUser } = useContext(AppContext);
 
   const handleSignIn = () => {
-    if ((email.current.value === localEmail) 
-          && (password.current.value === localPassword)) {
-      localStorage.setItem("signUp", email.current.value)
-      window.location.reload();
-    } else {
-      alert('Please input correct data')
-    }
+    const findedUser = users.find(el => el.email === email && el.password === password)
+    if (findedUser) {
+      setAuthUser(findedUser)
+    } setError(true);
   }
-
-  useEffect(() => {
-    if (localEmail) {
-      setShowHome(true);
-    }
-  }, [localEmail, setShowHome])
 
   return (
     <Dialog 
@@ -46,23 +36,27 @@ export const SignInModal = ({ openSignIn, handleClose, setShowHome }) => {
       <DialogContent>
         <DialogContentText>Sign in to see more </DialogContentText>
           <TextField 
-          ref={email}
           autoFocus
           margin="dense"
           id="name"
           label="Email Adress"
           type="email"
           fullWidth
+          value={email}
+          onChange={((e) => setEmail(e.target.value))}
         />
           <TextField 
-          ref={password}
           autoFocus
           margin="dense"
           id="pass"
           label="Password"
           type="password"
           fullWidth
+          value={password}
+          onChange={((e) => setPassword(e.target.value))}
         />
+        {error && <Alert severity="error">User with this email and password does not exist!</Alert>}
+
       </DialogContent>
       <DialogActions>
         <Button 
