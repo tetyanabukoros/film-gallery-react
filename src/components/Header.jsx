@@ -23,11 +23,12 @@ SwiperCore.use([Navigation]);
 
 export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSignUp, openSignUp}) => {
 
-  const {authUser, setAuthUser} = useContext(AppContext);
+  const {authUser, setAuthUser, resumeSignUp, setResumeSignUp} = useContext(AppContext);
   console.log(authUser);
 
   const handleLogOut = () => {
-    setAuthUser(null)
+    setAuthUser(null);
+    setResumeSignUp(false);
     window.location.reload();
   }
     
@@ -68,17 +69,28 @@ export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSi
               openSignIn={openSignIn} 
               handleClose={handleClose} 
             />
-            <Button 
+            {!resumeSignUp && <Button 
               onClick={handleOpenSignUp}
               style={{backgroundColor: '#DC143C', marginRight: "10px"}} 
               variant="contained"
             >
               Sign up
-            </Button>
+            </Button>}
             <SignUpModal
               openSignUp={openSignUp} 
               handleClose={handleClose} 
             />
+            {resumeSignUp && <Button 
+              onClick={handleOpenSignUp}
+              style={{backgroundColor: '#ff9800', marginRight: "10px"}} 
+              variant="contained"
+            >
+              Resume sign up
+            </Button>}
+            {/* <SignUpModal
+              openSignUp={openSignUp} 
+              handleClose={handleClose} 
+            /> */}
             </>
             )} 
         </Box>

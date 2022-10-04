@@ -46,7 +46,6 @@ export const SignInModal = ({ openSignIn, handleClose }) => {
           onChange={((e) => setEmail(e.target.value))}
         />
           <TextField 
-          autoFocus
           margin="dense"
           id="pass"
           label="Password"

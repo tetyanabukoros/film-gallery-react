@@ -15,7 +15,7 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signUpNewUser, users, authUser, setAuthUser} = useContext(AppContext);
+  const { signUpNewUser, users, authUser, setAuthUser, setResumeSignUp} = useContext(AppContext);
 
   console.log(users, authUser)
 
@@ -82,7 +82,18 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
         >
           Sign up
         </Button>
-        <Button onClick={handleClose} color="error">Cancel</Button>
+        <Button 
+          onClick={() => {
+            if (name !== '' || email !== '' || password !== '') {
+              handleClose()
+              setResumeSignUp(true);
+            } else {
+              handleClose()
+            }
+          }} 
+          color="error"
+        >
+            Cancel</Button>
       </DialogActions>
     </Dialog>
   )

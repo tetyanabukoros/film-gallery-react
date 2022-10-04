@@ -7,11 +7,14 @@ export const AppContext = React.createContext({
   setUsers: () => {},
   signUpNewUser: () => {},
   setAuthUser: () => {},
+  resumeSignUp: false,
+  setResumeSignUp: () => {},
 });
 
 export const AppContextProvider = ({children}) => {
   const [users, setUsers] = useLocalStorage('users', []);
   const [authUser, setAuthUser] = useLocalStorage('authUser', null);
+  const [resumeSignUp, setResumeSignUp] = useLocalStorage('resumeSignUp', false)
 
   const signUpNewUser = (newUser) => {
     return setUsers(prev => {
@@ -30,6 +33,8 @@ export const AppContextProvider = ({children}) => {
         setUsers,
         signUpNewUser,
         setAuthUser,
+        resumeSignUp,
+        setResumeSignUp
       }}
     >
     {children}
