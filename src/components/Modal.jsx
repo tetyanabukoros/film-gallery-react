@@ -40,18 +40,21 @@ export const Modal = ({selectedFilm, openFilmInfo, handleClose}) => {
           />
         </div>
         <div style={{display: "flex", flexDirection: "column"}}> 
-          <Typography gutterBottom variant="h6" component="div">
-            {`IMDb rating: ${selectedFilm.imdbRating}`}
-            <StarIcon fontSize="medium" style={{color: '#ffeb3b', marginBottom: "-5px"}} />
-          </Typography>
           <DialogContentText style={{ marginBottom: "15px" }} id="alert-dialog-slide-description">
             {selectedFilm.Plot}
           </DialogContentText>
           <Typography  gutterBottom  component="div">
             {`Writer: ${selectedFilm.Writer}`}
           </Typography>
-          <Typography variant="subtitle2" gutterBottom component="div">
+          <Typography variant="subtitle1" gutterBottom component="div">
             {`Actors: ${selectedFilm.Actors}`}
+          </Typography>
+          <Typography gutterBottom variant="h6" component="div">
+            {`IMDb rating: ${selectedFilm.imdbRating}`}
+            <StarIcon fontSize="medium" style={{color: '#ffeb3b', marginBottom: "-5px"}} />
+          </Typography>
+          <Typography variant="subtitle2" gutterBottom component="div">
+            {`Duration: ${selectedFilm.Runtime}`}
           </Typography>
         </div>
       </DialogContent>

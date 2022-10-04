@@ -39,7 +39,7 @@ export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSi
   >
     <Container fixed >
       <Toolbar>
-        <Typography marginRight={80}>Films gallery</Typography>
+        <Typography marginRight={80}></Typography>
         {authUser && (
         <Typography marginRight={10}>
           Wellcome, {authUser.name}!
@@ -87,12 +87,8 @@ export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSi
             >
               Resume sign up
             </Button>}
-            {/* <SignUpModal
-              openSignUp={openSignUp} 
-              handleClose={handleClose} 
-            /> */}
-            </>
-            )} 
+          </>
+          )}
         </Box>
       </Toolbar>
     </Container>

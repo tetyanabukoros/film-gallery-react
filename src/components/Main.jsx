@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -25,24 +25,28 @@ import SwiperCore, {
   Navigation
 } from 'swiper/core';
 import { gallery } from '../constants';
+import { AppContext } from '../AppContext';
 
 SwiperCore.use([Navigation]);
 
 export const Main = ({ handleOpenFilmInfo, setSelectedFilm }) => {
+
+  const { authUser } = useContext(AppContext);
+
   return (
 
     <main>
     <Paper >
     <Box marginTop={8} marginRight={-2} marginLeft={-2}  marginBottom={4} >
       <Swiper  navigation={true} className="mySwiper">
-        {gallery.map((item, i) => (
-          <SwiperSlide key={i}>
+        {gallery.map((item) => (
+          <SwiperSlide key={gallery.id}>
             <Typography
               paddingTop={8} 
               paddingBottom={8}
               style={{ backgroundImage: `url(${item.image})`, backgroundPosition: 'center',
               color: 'white'}}
-              variant={'h6'}
+              variant={'subtitle1'}
               align={'center'}
             >
               {item.text}
@@ -68,42 +72,44 @@ export const Main = ({ handleOpenFilmInfo, setSelectedFilm }) => {
                       image={card.Poster}
                       alt={card.Title}
                     />
-                <CardContent>
-                  <Typography variant="h3" style={{position: "absolute", transform: "translateY(-250px)", 
-                  color: "white",  maxWidth: "300px"}}>
-                    {card.Title}
-                  </Typography>
-                  <Typography style={{height: "64px"}} variant="h5">
-                    {'Genre:'} 
-                    {' '}
-                    {card.Genre}
-                  </Typography>
-                  <Typography>
-                    {`Director: ${card.Director}`}
-                  </Typography>
-                  <Typography>
-                    {'Year:'}
-                    {' '}
-                    {card.Year}
-                  </Typography>
-                  <CardActions style={{ padding: "0px"}} >
-                    <Button 
-                      onClick={() => {
-                        handleOpenFilmInfo();
-                        setSelectedFilm(card);
-                      }
-                        } 
-                      style={{backgroundColor: '#DC143C', marginRight: "20px"}} variant="contained">
-                      Show more
-                      <InfoOutlinedIcon color="inherit" />
-                    </Button>
-                    { 
-                    card.imdbRating > 7 
-                      ? <ThumbUpOutlinedIcon style={{color: '#2e7d32'}}/> 
-                      : <ThumbDownOutlinedIcon style={{color: '#dd2c00'}}/> 
-                    }
-                  </CardActions>
-                </CardContent>
+                    {authUser && (
+                      <CardContent>
+                        <Typography variant="h5" style={{position: "absolute", transform: "translateY(-250px)", 
+                        color: "white",  maxWidth: "300px"}}>
+                          {card.Title}
+                        </Typography>
+                        <Typography >
+                          {'Genre:'} 
+                          {' '}
+                          {card.Genre}
+                        </Typography>
+                        <Typography>
+                          {`Director: ${card.Director}`}
+                        </Typography>
+                        <Typography marginBottom={2}>
+                          {'Year:'}
+                          {' '}
+                          {card.Year}
+                        </Typography>
+                        <CardActions style={{ padding: "0px"}} >
+                          <Button 
+                            onClick={() => {
+                              handleOpenFilmInfo();
+                              setSelectedFilm(card);
+                            }
+                              } 
+                            style={{backgroundColor: '#DC143C', marginRight: "20px"}} variant="contained">
+                            Show more
+                            <InfoOutlinedIcon color="inherit" />
+                          </Button>
+                          { 
+                          card.imdbRating > 7 
+                            ? <ThumbUpOutlinedIcon style={{color: '#2e7d32'}}/> 
+                            : <ThumbDownOutlinedIcon style={{color: '#dd2c00'}}/> 
+                          }
+                        </CardActions>
+                      </CardContent>
+                    )}
               </Card>
             </Grid>
           ))}
