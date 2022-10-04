@@ -1,94 +1,91 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import { 
+  Dialog,
   Button,
   DialogActions,
   TextField,
-  Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
 } from '@mui/material';
+import { AppContext } from '../AppContext';
 
-export const SignUpModal = ({ openSignUp, handleClose, setShowHome }) => {
-  const name = useRef();
-  const email = useRef();
-  const password = useRef();
-  const localSignUp = localStorage.getItem("signUp");
-  const localEmail = localStorage.getItem("email");
+export const SignUpModal = ({ openSignUp, handleClose }) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { signUpNewUser, users, authUser, setAuthUser} = useContext(AppContext);
+
+  console.log(users, authUser)
+
 
   const handleSignUp = () => {
-    if (name.current.value 
-        && email.current.value 
-        && password.current.value) {
-        localStorage.setItem("name", name.current.value);
-        localStorage.setItem("email", email.current.value);
-        localStorage.setItem("password", password.current.value);
-        localStorage.setItem("signUp", email.current.value);
-        console.log(name.current.value, email.current.value, password.current.value)
-        window.location.reload();
-    }
+    signUpNewUser({
+      name, 
+      email, 
+      password
+    });
+
+    setAuthUser({
+      name, 
+      email, 
+      password
+    });
   }
 
-  useEffect(() => {
-    if (localSignUp) {
-      setShowHome(true)
-    };
-
-  }, [localSignUp, localEmail, setShowHome])
-
-
-  return (
+   return (
     <Dialog 
       open={openSignUp} 
       onClose={handleClose} 
       aria-labelledby="form-dialog-title"
     >
-    <DialogTitle id="form-dialog-title">Sign un</DialogTitle>
-    <DialogContent>
-      <DialogContentText>Join us! Sign up!</DialogContentText>
-        <TextField 
-          ref={email}
+      <DialogTitle id="form-dialog-title">Sign up</DialogTitle>
+      <DialogContent>
+        <DialogContentText>Join us! Sign up!</DialogContentText>
+          <TextField 
+          type="text"
+          placeholder='Enter name'
+          value={name}
           autoFocus
           margin="dense"
           id="name"
+          label="Name"
+          fullWidth
+          onChange={((e) => setName(e.target.value))}
+        />
+        <TextField 
+          autoFocus
+          value={email}
+          margin="dense"
+          id="email"
           label="Email Adress"
           type="email"
           fullWidth
+          onChange={((e) => setEmail(e.target.value))}
+
         />
         <TextField 
-          ref={password}
           autoFocus
+          value={password}
           margin="dense"
           id="pass"
           label="Password"
           type="password"
           fullWidth
+          onChange={((e) => setPassword(e.target.value))}
         />
       </DialogContent>
-          <DialogActions>
-            <Button 
-              onClick={handleSignUp} 
-              variant="contained" 
-              color="primary"
-            >
-              Sign up
-            </Button>
-            <Button onClick={handleClose} color="error">Cancel</Button>
-          </DialogActions>
-          {/* <div>
-              <div>
-                <input placeholder="name" type="text" ref={name} />
-              </div>
-              <div>
-                <input placeholder="email" type="text" ref={email} />
-              </div>
-              <div>
-                <input placeholder="password" type="password" ref={password} />
-              </div>
-              <button onClick={handleSignUp}>
-                Sign up
-              </button>
-          </div> */}
+      <DialogActions>
+        <Button 
+          onClick={handleSignUp} 
+          variant="contained" 
+          color="primary"
+        >
+          Sign up
+        </Button>
+        <Button onClick={handleClose} color="error">Cancel</Button>
+      </DialogActions>
     </Dialog>
   )
 }

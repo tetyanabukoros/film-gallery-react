@@ -13,12 +13,11 @@ import { Footer } from './components/Footer';
 SwiperCore.use([Navigation]);
 
 function App() {
-
   const [openSignIn, setOpenSignIn] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const [openFilmInfo, setOpenFilmInfo] = useState(false);
   const [selectedFilm, setSelectedFilm] = useState({});
-
+  
   const handleOpenSignIn = () => {
     setOpenSignIn(true);
   }
@@ -29,6 +28,7 @@ function App() {
 
   const handleClose = () => {
     setOpenSignIn(false);
+    setOpenSignUp(false);
     setOpenFilmInfo(false);
   }
 
@@ -36,29 +36,28 @@ function App() {
     setOpenFilmInfo(true);
   }
 
-   return (
-  <>
-    <Header 
-      handleOpenSignIn={handleOpenSignIn} 
-      openSignIn={openSignIn} 
+  return (
+    <>
+      <Header 
+        handleOpenSignIn={handleOpenSignIn} 
+        openSignIn={openSignIn} 
+        handleClose={handleClose}
+        handleOpenSignUp={handleOpenSignUp} 
+        openSignUp={openSignUp} 
+      />
+
+    <Main 
+      handleOpenFilmInfo={handleOpenFilmInfo} 
+      setSelectedFilm={setSelectedFilm}
+      />
+
+    <Footer />  
+
+    <Modal 
+      selectedFilm={selectedFilm} 
+      openFilmInfo={openFilmInfo} 
       handleClose={handleClose}
-      handleOpenSignUp={handleOpenSignUp} 
-      openSignUp={openSignUp} 
     />
-
-  <Main 
-    handleOpenFilmInfo={handleOpenFilmInfo} 
-    setSelectedFilm={setSelectedFilm}
-  
-  />
-
-  <Footer />
-
-  <Modal 
-    selectedFilm={selectedFilm} 
-    openFilmInfo={openFilmInfo} 
-    handleClose={handleClose}
-  />
   </>
   );
 }

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { getEmail } from './SignInModal';
-import { getPassword } from './SignInModal';
 
 import { 
   AppBar, 
@@ -18,22 +16,21 @@ import SwiperCore, {
 } from 'swiper/core';
 import { SignInModal } from './SignInModal';
 import { SignUpModal } from './SignUpModal';
+import { AppContext } from '../AppContext';
 
 SwiperCore.use([Navigation]);
 
 
 export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSignUp, openSignUp}) => {
-  const [showHome, setShowHome] = useState(false);
+
+  const {authUser, setAuthUser} = useContext(AppContext);
+  console.log(authUser);
 
   const handleLogOut = () => {
-    localStorage.removeItem('signUp');
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
+    setAuthUser(null)
     window.location.reload();
-    setShowHome(false)
   }
-
+    
   return (
     <AppBar 
     position="fixed" 
@@ -42,13 +39,12 @@ export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSi
     <Container fixed >
       <Toolbar>
         <Typography marginRight={80}>Films gallery</Typography>
-        {showHome && (
+        {authUser && (
         <Typography marginRight={10}>
-          Wellcome, {localStorage.getItem('name')}!
+          Wellcome, {authUser.name}!
         </Typography>)}
         <Box>
-          {
-            (getEmail && getPassword) || showHome
+          { authUser
             ? (
               <Button 
               color="inherit" 
@@ -71,7 +67,6 @@ export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSi
             <SignInModal 
               openSignIn={openSignIn} 
               handleClose={handleClose} 
-              setShowHome={setShowHome}
             />
             <Button 
               onClick={handleOpenSignUp}
@@ -83,7 +78,6 @@ export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSi
             <SignUpModal
               openSignUp={openSignUp} 
               handleClose={handleClose} 
-              setShowHome={setShowHome}
             />
             </>
             )} 
