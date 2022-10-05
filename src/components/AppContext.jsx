@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocalStorage } from './components/LocalStorage';
+import { useLocalStorage } from './LocalStorage';
 
 export const AppContext = React.createContext({
   authUser: null,

@@ -8,29 +8,35 @@ import {
   DialogContent,
   DialogContentText,
 } from '@mui/material';
-import { AppContext } from '../AppContext';
+import { AppContext } from './AppContext';
 
 export const SignUpModal = ({ openSignUp, handleClose }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorName, setErrorName] = useState('')
+
 
   const { signUpNewUser, setAuthUser, setResumeSignUp, setWellcomeScreen} = useContext(AppContext);
+  console.log(name, errorName)
 
   const handleSignUp = () => {
     setWellcomeScreen(false);
-    signUpNewUser({
-      name, 
-      email, 
-      password
-    });
-
-    setAuthUser({
-      name, 
-      email, 
-      password
-    });
-
+    if (name && email && password) {
+      signUpNewUser({
+        name, 
+        email, 
+        password
+      });
+      setAuthUser({
+        name, 
+        email, 
+        password
+      });
+  
+    } else {
+      setErrorName('Name is requires')
+    }
   }
 
    return (
@@ -53,7 +59,9 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           fullWidth
           onChange={((e) => setName(e.target.value))}
         />
+        {errorName}
         <TextField 
+          required
           value={email}
           margin="dense"
           id="email"
@@ -78,6 +86,11 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           onClick={handleSignUp} 
           variant="contained" 
           color="primary"
+          disabled={
+            name.trim() === ''
+            || email.trim() === ''
+            || password.trim() === ''
+          }
         >
           Sign up
         </Button>

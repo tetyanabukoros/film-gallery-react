@@ -10,7 +10,7 @@ import {
   DialogContentText,
   Alert
 } from '@mui/material';
-import { AppContext } from '../AppContext';
+import { AppContext } from './AppContext';
 
 export const SignInModal = ({ openSignIn, handleClose }) => {
   const [email, setEmail] = useState('');

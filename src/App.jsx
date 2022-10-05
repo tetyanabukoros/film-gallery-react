@@ -9,7 +9,7 @@ import { Modal } from './components/Modal';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
-import { AppContext } from './AppContext';
+import { AppContext } from './components/AppContext';
 
 SwiperCore.use([Navigation]);
 
@@ -47,8 +47,6 @@ function App() {
         handleClose={handleClose}
         handleOpenSignUp={handleOpenSignUp} 
         openSignUp={openSignUp} 
-        // wellcomeScreen={wellcomeScreen}
-        // setWellcomeScreen={setWellcomeScreen}
       />
       {!wellcomeScreen && (
         <>
@@ -61,7 +59,7 @@ function App() {
             handleClose={handleClose}
             openSignUp={openSignUp} 
           />
-        </>  
+        </> 
        )}
 
     <Modal 

@@ -17,7 +17,7 @@ import SwiperCore, {
 } from 'swiper/core';
 import { SignInModal } from './SignInModal';
 import { SignUpModal } from './SignUpModal';
-import { AppContext } from '../AppContext';
+import { AppContext } from './AppContext';
 
 SwiperCore.use([Navigation]);
 
@@ -29,8 +29,14 @@ export const Header = ({
   openSignUp, 
 }) => {
 
-  const {authUser, setAuthUser, resumeSignUp, setResumeSignUp, wellcomeScreen, setWellcomeScreen } = useContext(AppContext);
-  console.log(wellcomeScreen);
+  const {
+    authUser, 
+    setAuthUser, 
+    resumeSignUp, 
+    setResumeSignUp, 
+    wellcomeScreen, 
+    setWellcomeScreen 
+  } = useContext(AppContext);
 
   const handleLogOut = () => {
     setAuthUser(null);

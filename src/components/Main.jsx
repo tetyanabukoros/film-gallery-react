@@ -1,37 +1,38 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+// import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+// import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
+// import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 
-import films from '../api/movies.json'
+// import films from '../api/movies.json'
 
-import Grid from '@mui/material/Grid';
+// import Grid from '@mui/material/Grid';
 import { 
-  Container, 
+  // Container, 
   Typography,
   Box,
-  Button,
+  // Button,
   Paper,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
+  // Card,
+  // CardMedia,
+  // CardContent,
+  // CardActions,
  } from '@mui/material';
 
 import SwiperCore, {
   Navigation
 } from 'swiper/core';
-import { gallery } from '../constants';
-import { AppContext } from '../AppContext';
+import { gallery } from '../api/constants';
+// import { AppContext } from './AppContext';
+import InfScroll from './InfScroll';
 
 SwiperCore.use([Navigation]);
 
 export const Main = ({ handleOpenFilmInfo, setSelectedFilm }) => {
 
-  const { authUser } = useContext(AppContext);
+  // const { authUser } = useContext(AppContext);
 
   return (
 
@@ -56,7 +57,9 @@ export const Main = ({ handleOpenFilmInfo, setSelectedFilm }) => {
       </Swiper>
     </Box>
     </Paper>
-      <Container  style={{ maxWidth: "800px"}}>
+    <InfScroll 
+          handleOpenFilmInfo={handleOpenFilmInfo} setSelectedFilm={setSelectedFilm} />
+      {/* <Container  style={{ maxWidth: "800px"}}>
         <Grid 
           container 
           spacing={{ xs: 2, md: 3 }} 
@@ -114,7 +117,7 @@ export const Main = ({ handleOpenFilmInfo, setSelectedFilm }) => {
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </Container> */}
     </main>
   )
 }

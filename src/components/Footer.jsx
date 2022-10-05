@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Typography, Button } from '@mui/material';
 import { SignInModal } from './SignInModal';
-import { AppContext } from '../AppContext';
+import { AppContext } from './AppContext';
 
 export const Footer = ({ openSignIn, handleClose, handleOpenSignIn }) => {
 const { authUser } = useContext(AppContext);
