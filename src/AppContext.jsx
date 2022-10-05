@@ -9,12 +9,15 @@ export const AppContext = React.createContext({
   setAuthUser: () => {},
   resumeSignUp: false,
   setResumeSignUp: () => {},
+  wellcomeScreen: true,
+  setWellcomeScreen: () => {},
 });
 
 export const AppContextProvider = ({children}) => {
   const [users, setUsers] = useLocalStorage('users', []);
   const [authUser, setAuthUser] = useLocalStorage('authUser', null);
-  const [resumeSignUp, setResumeSignUp] = useLocalStorage('resumeSignUp', false)
+  const [resumeSignUp, setResumeSignUp] = useLocalStorage('resumeSignUp', false);
+  const [wellcomeScreen, setWellcomeScreen] = useLocalStorage('wellcomeScreen', true);
 
   const signUpNewUser = (newUser) => {
     return setUsers(prev => {
@@ -34,7 +37,9 @@ export const AppContextProvider = ({children}) => {
         signUpNewUser,
         setAuthUser,
         resumeSignUp,
-        setResumeSignUp
+        setResumeSignUp,
+        wellcomeScreen,
+        setWellcomeScreen,
       }}
     >
     {children}

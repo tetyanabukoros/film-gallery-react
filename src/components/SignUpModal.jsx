@@ -15,12 +15,10 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signUpNewUser, users, authUser, setAuthUser, setResumeSignUp} = useContext(AppContext);
-
-  console.log(users, authUser)
-
+  const { signUpNewUser, setAuthUser, setResumeSignUp, setWellcomeScreen} = useContext(AppContext);
 
   const handleSignUp = () => {
+    setWellcomeScreen(false);
     signUpNewUser({
       name, 
       email, 
@@ -32,6 +30,7 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
       email, 
       password
     });
+
   }
 
    return (

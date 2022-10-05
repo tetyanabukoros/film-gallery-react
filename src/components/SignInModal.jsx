@@ -17,12 +17,13 @@ export const SignInModal = ({ openSignIn, handleClose }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
-  const { users, setAuthUser } = useContext(AppContext);
+  const { users, setAuthUser, setWellcomeScreen } = useContext(AppContext);
 
   const handleSignIn = () => {
     const findedUser = users.find(el => el.email === email && el.password === password)
     if (findedUser) {
-      setAuthUser(findedUser)
+      setAuthUser(findedUser);
+      setWellcomeScreen(false);
     } setError(true);
   }
 

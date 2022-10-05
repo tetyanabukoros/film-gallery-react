@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
@@ -9,6 +9,7 @@ import { Modal } from './components/Modal';
 import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
+import { AppContext } from './AppContext';
 
 SwiperCore.use([Navigation]);
 
@@ -17,6 +18,8 @@ function App() {
   const [openSignUp, setOpenSignUp] = useState(false);
   const [openFilmInfo, setOpenFilmInfo] = useState(false);
   const [selectedFilm, setSelectedFilm] = useState({});
+
+  const {wellcomeScreen} = useContext(AppContext);
   
   const handleOpenSignIn = () => {
     setOpenSignIn(true);
@@ -44,14 +47,22 @@ function App() {
         handleClose={handleClose}
         handleOpenSignUp={handleOpenSignUp} 
         openSignUp={openSignUp} 
+        // wellcomeScreen={wellcomeScreen}
+        // setWellcomeScreen={setWellcomeScreen}
       />
-
-    <Main 
-      handleOpenFilmInfo={handleOpenFilmInfo} 
-      setSelectedFilm={setSelectedFilm}
-      />
-
-    <Footer />  
+      {!wellcomeScreen && (
+        <>
+          <Main
+            handleOpenFilmInfo={handleOpenFilmInfo}
+            setSelectedFilm={setSelectedFilm} 
+          />
+          <Footer
+            handleOpenSignIn={handleOpenSignIn}
+            handleClose={handleClose}
+            openSignUp={openSignUp} 
+          />
+        </>  
+       )}
 
     <Modal 
       selectedFilm={selectedFilm} 

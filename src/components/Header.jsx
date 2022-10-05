@@ -9,6 +9,7 @@ import {
   Typography,
   Box,
   Button,
+  CardMedia,
 } from '@mui/material';
 
 import SwiperCore, {
@@ -21,77 +22,112 @@ import { AppContext } from '../AppContext';
 SwiperCore.use([Navigation]);
 
 
-export const Header = ({ handleOpenSignIn, openSignIn, handleClose, handleOpenSignUp, openSignUp}) => {
+export const Header = ({ 
+  handleOpenSignIn, 
+  openSignIn, handleClose, 
+  handleOpenSignUp, 
+  openSignUp, 
+}) => {
 
-  const {authUser, setAuthUser, resumeSignUp, setResumeSignUp} = useContext(AppContext);
-  console.log(authUser);
+  const {authUser, setAuthUser, resumeSignUp, setResumeSignUp, wellcomeScreen, setWellcomeScreen } = useContext(AppContext);
+  console.log(wellcomeScreen);
 
   const handleLogOut = () => {
     setAuthUser(null);
     setResumeSignUp(false);
     window.location.reload();
+    setWellcomeScreen(true);
   }
     
   return (
-    <AppBar 
-    position="fixed" 
-    color="primary"
-  >
-    <Container fixed >
-      <Toolbar>
-        <Typography marginRight={80}></Typography>
-        {authUser && (
-        <Typography marginRight={10}>
-          Wellcome, {authUser.name}!
-        </Typography>)}
-        <Box>
-          { authUser
-            ? (
-              <Button 
-              color="inherit" 
-              variant="outlined"
-              onClick={handleLogOut}
-            >
-              Log out
-            </Button>
-            )
-            : ( 
-            <> 
-            <Button 
-              style={{marginRight: "10px"}}
-              color="inherit" 
-              variant="outlined"
-              onClick={handleOpenSignIn}
-            >
-              Sign in
-            </Button>
-            <SignInModal 
-              openSignIn={openSignIn} 
-              handleClose={handleClose} 
-            />
-            {!resumeSignUp && <Button 
-              onClick={handleOpenSignUp}
-              style={{backgroundColor: '#DC143C', marginRight: "10px"}} 
-              variant="contained"
-            >
-              Sign up
-            </Button>}
-            <SignUpModal
-              openSignUp={openSignUp} 
-              handleClose={handleClose} 
-            />
-            {resumeSignUp && <Button 
-              onClick={handleOpenSignUp}
-              style={{backgroundColor: '#ff9800', marginRight: "10px"}} 
-              variant="contained"
-            >
-              Resume sign up
-            </Button>}
-          </>
+  <>
+    <AppBar
+      position="fixed"
+      color="primary"
+    >
+      <Container fixed>
+        <Toolbar>
+          <Typography marginRight={80}></Typography>
+          {authUser && (
+            <Typography marginRight={10}>
+              Wellcome, {authUser.name}!
+            </Typography>)}
+          <Box>
+            {authUser
+              ? (
+                <Button
+                  color="inherit"
+                  variant="outlined"
+                  onClick={handleLogOut}
+                >
+                  Log out
+                </Button>
+              )
+              : (
+                <>
+                  <Button
+                    style={{ marginRight: "10px" }}
+                    color="inherit"
+                    variant="outlined"
+                    onClick={() => handleOpenSignIn()}
+                  >
+                    Sign in
+                  </Button>
+
+                  <SignInModal
+                    openSignIn={openSignIn}
+                    handleClose={handleClose} 
+                    setWellcomeScreen={setWellcomeScreen}
+                  />
+
+                  {!resumeSignUp && <Button
+                    onClick={handleOpenSignUp}
+                    style={{ backgroundColor: '#DC143C', marginRight: "10px" }}
+                    variant="contained"
+                  >
+                    Sign up
+                  </Button>}
+
+                  {wellcomeScreen && (
+                    <Button
+                      onClick={() => {
+                        setWellcomeScreen(false);
+                      }}
+                      style={{ backgroundColor: '#ff9800', marginRight: "10px" }}
+                      variant="contained"
+                    >
+                      Browse
+
+                    </Button>
+                  )}
+
+                  <SignUpModal
+                    openSignUp={openSignUp}
+                    handleClose={handleClose} 
+                    setWellcomeScreen={setWellcomeScreen}
+                  />
+
+                  {resumeSignUp && <Button
+                    onClick={handleOpenSignUp}
+                    style={{ backgroundColor: '#ff9800', marginRight: "10px" }}
+                    variant="contained"
+                  >
+                    Resume sign up
+                  </Button>}
+                </>
+              )}
+
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+    {wellcomeScreen && (
+      <CardMedia
+          style={{position: "absolute", transform: "translateY(-15%)"}}
+          component="img"
+          image={"https://img.freepik.com/premium-photo/cinema-cinema-attributes-cinemas-films-online-viewing-popcorn-and-glasses_99433-1582.jpg?w=900"}
+          alt={"Wellcome Screen"} />
           )}
-        </Box>
-      </Toolbar>
-    </Container>
-  </AppBar>
+    </>
   )
 }
