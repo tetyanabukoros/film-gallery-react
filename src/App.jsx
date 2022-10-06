@@ -7,7 +7,6 @@ import SwiperCore, {
 } from 'swiper/core';
 import { Modal } from './components/Modal';
 import { Header } from './components/Header';
-import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import { AppContext } from './components/AppContext';
 import { Carusel } from './components/Carusel';
@@ -54,7 +53,8 @@ function App() {
       {wellcomeScreen && (
         <Paper style={{
           backgroundImage: "url(https://img.freepik.com/premium-photo/cinema-cinema-attributes-cinemas-films-online-viewing-popcorn-and-glasses_99433-1582.jpg?w=900)", 
-          height: "100vh", 
+          height: "100vh",
+          backgroundSize: "cover",
           margin: "-10px",  
           backgroundPosition: 'center', 
           marginTop: '10px'

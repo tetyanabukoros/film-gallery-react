@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import 'swiper/css';
 import '../App.css';
-
 import 'swiper/css/navigation';
 
 import { 
@@ -11,7 +10,6 @@ import {
   Typography,
   Box,
   Button,
-  CardMedia,
 } from '@mui/material';
 
 import SwiperCore, {

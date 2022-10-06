@@ -22,32 +22,39 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
   const { signUpNewUser, setAuthUser, setResumeSignUp, setWellcomeScreen} = useContext(AppContext);
 
   const handleSignUp = () => {
-    setWellcomeScreen(false);
-    if (!name || !email || !password) {
-      setError(true)
+    if (!name) {
+      setError(true);
     }
 
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      setEmailError(true);
-    } 
-
-    if (!/^(?=.*\d)(?=.*[a-zA-Z])(?!.*[\W_\x7B-\xFF]).{6,15}$/i.test(password)) {
-      setPasswordError(true);
+    if (!email) {
+      setError(true);
     } else {
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+        setEmailError(true);
+      }}
 
-    if (name && email && password) {
+    if (!password) {
+      setError(true);
+    } else {
+      if (!/^.*(?=.{6,20})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&!-_]).*$/i.test(password)) {
+      setPasswordError(true);
+    }};
+
+    if (!error && !emailError && !passwordError) {
       signUpNewUser({
         name, 
         email, 
         password
       });
-
+  
       setAuthUser({
         name, 
         email, 
         password
         });
-    }}
+        
+      setWellcomeScreen(false);
+    }
   }
 
    return (
@@ -59,10 +66,9 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
       <DialogTitle id="form-dialog-title">Sign up</DialogTitle>
       {error && <Alert severity="error">Please fill in all fields</Alert>}
       {emailError && <Alert severity="error">Invalid email</Alert>}
-      {passwordError && <Alert severity="error">Password must contain 1 capital letter, 1 special character and 1 number</Alert>}
+      {passwordError && <Alert severity="error">Password must contain minimum 6 characters: 1 capital letter, 1 special character and 1 number</Alert>}
       <DialogContent>
         <DialogContentText>Join us! Sign up!</DialogContentText>
-
           <TextField
           required 
           type="text"
@@ -73,7 +79,12 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           id="name"
           label="Name"
           fullWidth
-          onChange={((e) => setName(e.target.value))}
+          onChange={((e) => {
+            setName(e.target.value);
+            setError(false);
+            setEmailError(false);
+            setPasswordError(false);
+          })}
         />
 
         <TextField 
@@ -84,7 +95,12 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           label="Email Adress"
           type="email"
           fullWidth
-          onChange={((e) => setEmail(e.target.value))}
+          onChange={((e) => {
+            setEmail(e.target.value);
+            setError(false);
+            setEmailError(false);
+            setPasswordError(false);
+          })}
         />
 
         <TextField 
@@ -95,7 +111,12 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           label="Password"
           type="password"
           fullWidth
-          onChange={((e) => setPassword(e.target.value))}
+          onChange={((e) => {
+            setPassword(e.target.value);
+            setError(false);
+            setEmailError(false);
+            setPasswordError(false);
+          })}
         />
         </DialogContent>
       <DialogActions>
