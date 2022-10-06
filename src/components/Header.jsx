@@ -26,7 +26,8 @@ SwiperCore.use([Navigation]);
 
 export const Header = ({ 
   handleOpenSignIn, 
-  openSignIn, handleClose, 
+  openSignIn, 
+  handleClose, 
   handleOpenSignUp, 
   openSignUp, 
 }) => {
