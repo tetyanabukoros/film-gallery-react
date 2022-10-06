@@ -10,6 +10,9 @@ import { Header } from './components/Header';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
 import { AppContext } from './components/AppContext';
+import { Carusel } from './components/Carusel';
+import MoviesList from './components/MoviesList';
+import { Paper } from '@mui/material';
 
 SwiperCore.use([Navigation]);
 
@@ -20,7 +23,7 @@ function App() {
   const [selectedFilm, setSelectedFilm] = useState({});
 
   const {wellcomeScreen} = useContext(AppContext);
-  
+
   const handleOpenSignIn = () => {
     setOpenSignIn(true);
   }
@@ -48,12 +51,24 @@ function App() {
         handleOpenSignUp={handleOpenSignUp} 
         openSignUp={openSignUp} 
       />
+      {wellcomeScreen && (
+        <Paper style={{
+          backgroundImage: "url(https://img.freepik.com/premium-photo/cinema-cinema-attributes-cinemas-films-online-viewing-popcorn-and-glasses_99433-1582.jpg?w=900)", 
+          height: "100vh", 
+          margin: "-10px",  
+          backgroundPosition: 'center', 
+          marginTop: '10px'
+        }}>
+      </Paper>
+      )}
+
       {!wellcomeScreen && (
         <>
-          <Main
-            handleOpenFilmInfo={handleOpenFilmInfo}
+          <Carusel />
+          <MoviesList 
+            handleOpenFilmInfo={handleOpenFilmInfo} 
             setSelectedFilm={setSelectedFilm} 
-          />
+         />
           <Footer
             handleOpenSignIn={handleOpenSignIn}
             handleClose={handleClose}

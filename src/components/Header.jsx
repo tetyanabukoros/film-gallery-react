@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import 'swiper/css';
+import '../App.css';
+
 import 'swiper/css/navigation';
 
 import { 
@@ -53,7 +55,7 @@ export const Header = ({
     >
       <Container fixed>
         <Toolbar>
-          <Typography marginRight={80}></Typography>
+          <Typography classnames="headerButtons" ></Typography>
           {authUser && (
             <Typography marginRight={10}>
               Wellcome, {authUser.name}!
@@ -127,13 +129,13 @@ export const Header = ({
         </Toolbar>
       </Container>
     </AppBar>
-    {wellcomeScreen && (
+    {/* {wellcomeScreen && (
       <CardMedia
           style={{position: "absolute", transform: "translateY(-15%)"}}
           component="img"
           image={"https://img.freepik.com/premium-photo/cinema-cinema-attributes-cinemas-films-online-viewing-popcorn-and-glasses_99433-1582.jpg?w=900"}
           alt={"Wellcome Screen"} />
-          )}
+          )} */}
     </>
   )
 }

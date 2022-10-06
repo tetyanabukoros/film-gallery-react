@@ -14,11 +14,11 @@ import {
   Link,
 } from '@mui/material';
 
-import SwiperCore, {
-  Navigation
-} from 'swiper/core';
+// import SwiperCore, {
+//   Navigation
+// } from 'swiper/core';
 
-SwiperCore.use([Navigation]);
+// SwiperCore.use([Navigation]);
 
 export const Modal = ({selectedFilm, openFilmInfo, handleClose}) => {
 
@@ -32,14 +32,19 @@ export const Modal = ({selectedFilm, openFilmInfo, handleClose}) => {
     >
       <DialogTitle>{selectedFilm.Title}</DialogTitle>
       <DialogContent style={{display: "flex"}}>
-        <div style={{maxWidth: "150px", marginRight: "15px" }}>
+        <div style={{minWidth: "150px", marginRight: "15px" }}>
           <CardMedia
+            style={{width: "100%" }}
             component="img"
             image={selectedFilm.Poster}
             alt={selectedFilm.Title}
           />
         </div>
         <div style={{display: "flex", flexDirection: "column"}}> 
+          <Typography gutterBottom variant="h6" component="div">
+            {`IMDb rating: ${selectedFilm.imdbRating}`}
+            <StarIcon fontSize="medium" style={{color: '#ffeb3b', marginBottom: "-5px"}} />
+          </Typography>
           <DialogContentText style={{ marginBottom: "15px" }} id="alert-dialog-slide-description">
             {selectedFilm.Plot}
           </DialogContentText>
@@ -48,10 +53,6 @@ export const Modal = ({selectedFilm, openFilmInfo, handleClose}) => {
           </Typography>
           <Typography variant="subtitle1" gutterBottom component="div">
             {`Actors: ${selectedFilm.Actors}`}
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            {`IMDb rating: ${selectedFilm.imdbRating}`}
-            <StarIcon fontSize="medium" style={{color: '#ffeb3b', marginBottom: "-5px"}} />
           </Typography>
           <Typography variant="subtitle2" gutterBottom component="div">
             {`Duration: ${selectedFilm.Runtime}`}

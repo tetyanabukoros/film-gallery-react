@@ -16,9 +16,7 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
   const [password, setPassword] = useState('');
   const [errorName, setErrorName] = useState('')
 
-
   const { signUpNewUser, setAuthUser, setResumeSignUp, setWellcomeScreen} = useContext(AppContext);
-  console.log(name, errorName)
 
   const handleSignUp = () => {
     setWellcomeScreen(false);
