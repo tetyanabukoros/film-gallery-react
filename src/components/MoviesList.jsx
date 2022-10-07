@@ -45,7 +45,6 @@ class MoviesList extends React.Component {
     const handleOpenFilmInfo = this.props.handleOpenFilmInfo;
     const setSelectedFilm = this.props.setSelectedFilm;
     const authUser = this.context.authUser;
-    console.log(authUser)
     return (
       <div>
         <Box >

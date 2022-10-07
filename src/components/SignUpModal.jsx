@@ -19,35 +19,55 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState('');
 
-  const { signUpNewUser, setAuthUser, setResumeSignUp, setWellcomeScreen} = useContext(AppContext);
+  const { 
+    signUpNewUser, 
+    setAuthUser, 
+    setResumeSignUp, 
+    setWellcomeScreen
+  } = useContext(AppContext);
+
+  function validatePassword(pw) {
+    return /[A-Z]/.test(pw) &&
+           /[a-z]/.test(pw) &&
+           /[0-9]/.test(pw) &&
+           /[^A-Za-z0-9]/.test(pw) &&
+           pw.length >= 6;
+  }
+
+  function validateEmail(mail) {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+    return (true)
+  }
+    return (false)
+  }
 
   const handleSignUp = () => {
-    setWellcomeScreen(false);
     if (!name || !email || !password) {
       setError(true)
     }
 
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    if (email && (!validateEmail(email))) {
       setEmailError(true);
+    }  else {
+      if (password && (!validatePassword(password))) {
+        setPasswordError(true);
+      } else { 
+        if (name && email && password) {
+          signUpNewUser({
+              name, 
+              email, 
+              password
+            });
+    
+            setAuthUser({
+              name, 
+              email, 
+              password
+              });
+            setWellcomeScreen(false);
+        }
+      }
     } 
-
-    if (!/^(?=.*\d)(?=.*[a-zA-Z])(?!.*[\W_\x7B-\xFF]).{6,15}$/i.test(password)) {
-      setPasswordError(true);
-    } else {
-
-    if (name && email && password) {
-      signUpNewUser({
-        name, 
-        email, 
-        password
-      });
-
-      setAuthUser({
-        name, 
-        email, 
-        password
-        });
-    }}
   }
 
    return (
@@ -73,7 +93,12 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           id="name"
           label="Name"
           fullWidth
-          onChange={((e) => setName(e.target.value))}
+          onChange={((e) => {
+            setError(false)
+            setName(e.target.value)
+          }
+            
+          )}
         />
 
         <TextField 
@@ -84,7 +109,11 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           label="Email Adress"
           type="email"
           fullWidth
-          onChange={((e) => setEmail(e.target.value))}
+          onChange={((e) => {
+            setEmailError(false);
+            setError(false);
+            setEmail(e.target.value);
+          })}
         />
 
         <TextField 
@@ -95,7 +124,11 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
           label="Password"
           type="password"
           fullWidth
-          onChange={((e) => setPassword(e.target.value))}
+          onChange={((e) => {
+            setPasswordError(false);
+            setError(false);
+            setPassword(e.target.value);
+          })}
         />
         </DialogContent>
       <DialogActions>
