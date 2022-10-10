@@ -57,7 +57,7 @@ function App() {
           backgroundSize: "cover",
           margin: "-10px",  
           backgroundPosition: 'center', 
-          marginTop: '10px'
+          marginTop: '10px',
         }}>
       </Paper>
       )}
