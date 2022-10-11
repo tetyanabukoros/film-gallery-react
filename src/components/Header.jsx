@@ -21,7 +21,6 @@ import { AppContext } from './AppContext';
 
 SwiperCore.use([Navigation]);
 
-
 export const Header = ({ 
   handleOpenSignIn, 
   openSignIn, 
@@ -56,9 +55,9 @@ export const Header = ({
         <Toolbar>
           <Typography classnames="headerButtons" ></Typography>
           {authUser && (
-            <Typography marginRight={10}>
-              Wellcome, {authUser.name}!
-            </Typography>)}
+          <Typography marginRight={10}>
+            Wellcome, {authUser.name}!
+          </Typography>)}
           <Box>
             {authUser
               ? (
@@ -127,14 +126,7 @@ export const Header = ({
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
-    {/* {wellcomeScreen && (
-      <CardMedia
-          style={{position: "absolute", transform: "translateY(-15%)"}}
-          component="img"
-          image={"https://img.freepik.com/premium-photo/cinema-cinema-attributes-cinemas-films-online-viewing-popcorn-and-glasses_99433-1582.jpg?w=900"}
-          alt={"Wellcome Screen"} />
-          )} */}
+      </AppBar>
     </>
   )
 }

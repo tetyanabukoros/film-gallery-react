@@ -1,11 +1,9 @@
 import React from "react";
 import '../App.css'
 import InfiniteScroll from "react-infinite-scroll-component";
-
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-
 import films from '../api/movies.json';
 
 import { 
@@ -53,7 +51,11 @@ class MoviesList extends React.Component {
             dataLength={this.state.items.length}
             next={this.fetchMoreData}
             hasMore={this.state.hasMore}
-            loader={<h4  style={{ textAlign: "center", gridColumnStart: "1", gridColumnEnd: "3" }}>Loading...</h4>}
+            loader={
+              <h4  style={{ textAlign: "center", gridColumnStart: "1", gridColumnEnd: "3" }}>
+              Loading...
+              </h4>
+            }
             endMessage={
               <p style={{ textAlign: "center", gridColumnStart: "1", gridColumnEnd: "3" }}>
                 <b> You you have watched all the movies</b>
@@ -69,12 +71,12 @@ class MoviesList extends React.Component {
                   image={films[index].Poster}
                   alt={films[index].Title}
                 />
-                  {authUser && (
-                <CardContent style={{ textAlign: "start"}}>
-                  <Typography variant="h5" style={{position: "absolute", transform: "translateY(-250px)", 
+                  <Typography marginRight={3} variant="h5" style={{position: "absolute", transform: "translateY(-100px)", 
                   color: "white",  maxWidth: "300px"}}>
                     {films[index].Title}
                   </Typography>
+                  {authUser && (
+                <CardContent style={{ textAlign: "start"}}>
                   <Typography >
                     {'Genre:'} 
                     {' '}
@@ -108,12 +110,10 @@ class MoviesList extends React.Component {
                 </CardContent>
               )}
               </Card>
-
             </Container>
           ))}
         </InfiniteScroll>
         </Box>
-
       </div>
     );
   }

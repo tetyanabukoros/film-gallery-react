@@ -18,10 +18,7 @@ SwiperCore.use([Navigation]);
 
 export const Carusel = () => {
   return (
-    <Box 
-    className="box"
-      // marginTop={8} marginRight={-2} marginLeft={-2}  marginBottom={4}
-    >
+    <Box className="box">
       <Swiper  navigation={true} className="mySwiper" >
         {gallery.map((item) => (
           <SwiperSlide key={gallery.id} >

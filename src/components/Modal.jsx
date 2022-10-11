@@ -1,5 +1,4 @@
 import React from 'react';
-
 import StarIcon from '@mui/icons-material/Star';
 
 import { 
@@ -13,12 +12,6 @@ import {
   DialogContentText,
   Link,
 } from '@mui/material';
-
-// import SwiperCore, {
-//   Navigation
-// } from 'swiper/core';
-
-// SwiperCore.use([Navigation]);
 
 export const Modal = ({selectedFilm, openFilmInfo, handleClose}) => {
 

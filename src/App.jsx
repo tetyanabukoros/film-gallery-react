@@ -77,12 +77,12 @@ function App() {
         </> 
        )}
 
-    <Modal 
-      selectedFilm={selectedFilm} 
-      openFilmInfo={openFilmInfo} 
-      handleClose={handleClose}
-    />
-  </>
+      <Modal 
+        selectedFilm={selectedFilm} 
+        openFilmInfo={openFilmInfo} 
+        handleClose={handleClose}
+      />
+    </>
   );
 }
 

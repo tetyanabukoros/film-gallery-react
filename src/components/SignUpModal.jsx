@@ -79,7 +79,9 @@ export const SignUpModal = ({ openSignUp, handleClose }) => {
       <DialogTitle id="form-dialog-title">Sign up</DialogTitle>
       {error && <Alert severity="error">Please fill in all fields</Alert>}
       {emailError && <Alert severity="error">Invalid email</Alert>}
-      {passwordError && <Alert severity="error">Password must contain minimum 6 characters: 1 capital letter, 1 special character and 1 number</Alert>}
+      {passwordError && <Alert severity="error">
+        Password must contain minimum 6 characters: 1 capital letter, 1 special character and 1 number
+      </Alert>}
       <DialogContent>
         <DialogContentText>Join us! Sign up!</DialogContentText>
           <TextField
